@@ -20,6 +20,7 @@ function printBannerWithShadow(ascii: string) {
   for (const line of bannerLines) {
     console.log(FACE(line.padEnd(rowWidth)));
   }
+  console.log();
 }
 
 export async function runWakeup() {
@@ -32,4 +33,22 @@ export async function runWakeup() {
   }
 
   printBannerWithShadow(ascii);
+
+  const mode = await select({
+    message: "Which mode you want to proceed with ?",
+    options: [
+      { value: "cli", label: "CLI" },
+      { value: "Telegram", label: "TELEGRAM" },
+    ],
+  });
+
+  if (isCancel(mode)) {
+    process.exit(0);
+  }
+
+  if (mode === "cli") {
+    console.log(chalk.dim("Starting cli mode..."));
+  } else {
+    console.log(chalk.dim("starting Telegram mode..."));
+  }
 }
