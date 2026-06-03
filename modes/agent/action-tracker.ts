@@ -22,7 +22,18 @@ export class ActionTracker {
     this.actions.push(action);
     return action;
   }
-  getActions() {}
-  getPendingMutations() {}
-  updateStatus() {}
+
+  getActions(): readonly ActionLog[] {
+    return this.actions;
+  }
+
+  getPendingMutations(): ActionLog[] {
+    return this.actions.filter((a) => a.type && a.status === " pending");
+  }
+  updateStatus(id: string, status: ActionStatus, userApproved?: boolean): void {
+    const a = this.actions.find((x) => x.id === id);
+    if (!a) return;
+    a.status = status;
+    if (userApproved !== undefined) a.userApproved = userApproved;
+  }
 }
