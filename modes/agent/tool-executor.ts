@@ -122,7 +122,7 @@ export class ToolExecutor {
       type: "file_create",
       path: "key",
       details: { after: content },
-      status: " pending",
+      status: "pending",
     });
     return `Staged new file: ${key}`;
   }
@@ -140,7 +140,7 @@ export class ToolExecutor {
       type: "file_modify",
       path: "key",
       details: { before, after: content },
-      status: " pending",
+      status: "pending",
     });
     return `Staged update: ${key}`;
   }
@@ -160,7 +160,7 @@ export class ToolExecutor {
       type: "file_delete",
       path: "key",
       details: { before },
-      status: " pending",
+      status: "pending",
     });
     return `Staged delete: ${key}`;
   }
@@ -175,7 +175,7 @@ export class ToolExecutor {
       type: "folder_create",
       path: "key",
       details: { after: key },
-      status: " pending",
+      status: "pending",
     });
     return `Staged folder: ${key}`;
   }
@@ -311,5 +311,17 @@ export class ToolExecutor {
       status: "excuted",
     });
     return summary;
+  }
+
+  queueShell(command: string): string {
+    if (!this.config.tools.allowShellExcucation)
+      throw new Error("Shell executation disables");
+    this.tracker.log({
+      type: "tool_execute",
+      path: "shell",
+      details: { command, toolName: "execute_shell" },
+      status: "pending",
+    });
+    return `Shell queued: ${command}`;
   }
 }

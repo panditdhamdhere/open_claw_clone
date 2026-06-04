@@ -6,7 +6,7 @@ export type ActionType =
   | " code_analist"
   | "tool_execute";
 
-export type ActionStatus = " pending" | "excuted" | "approved" | "rejected";
+export type ActionStatus = "pending" | "excuted" | "approved" | "rejected";
 
 export interface ActionLog {
   id: string;
