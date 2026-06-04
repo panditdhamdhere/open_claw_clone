@@ -3,10 +3,10 @@ export type ActionType =
   | "file_modify"
   | "file_delete"
   | "folder_create"
-  | " code_analist"
+  | "code_analysis"
   | "tool_execute";
 
-export type ActionStatus = "pending" | "excuted" | "approved" | "rejected";
+export type ActionStatus = "pending" | "executed" | "approved" | "rejected";
 
 export interface ActionLog {
   id: string;
@@ -29,7 +29,7 @@ export interface AgentConfig {
   maxFileSizeToRead: number;
   excludePatterns: string[];
   tools: {
-    allowShellExcucation: boolean;
+    allowShellExecution: boolean;
     allowFileModification: boolean;
     allowFileCreation: boolean;
     allowFolderCreation: boolean;
@@ -49,7 +49,7 @@ export const defaultAgentConfig = (): AgentConfig => ({
     ".env*",
   ],
   tools: {
-    allowShellExcucation: true,
+    allowShellExecution: true,
     allowFileModification: true,
     allowFileCreation: true,
     allowFolderCreation: true,
