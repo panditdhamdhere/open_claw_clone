@@ -4,7 +4,7 @@ import { ToolLoopAgent, stepCountIs } from "ai";
 import { getAgentModel } from "../../ai/ai.config";
 import { ActionTracker } from "../agent/action-tracker";
 import { ToolExecutor } from "../agent/tool-executor";
-import { createAgentTool } from "../agent/agent-tools";
+import { createAgentTools } from "../agent/agent-tools";
 import { defaultAgentConfig } from "../agent/types";
 import { runApprovalFlow } from "../agent/approval";
 import { renderTerminalMarkdown } from "../../tui/terminal-md";
@@ -39,7 +39,7 @@ export async function runPlanMode(): Promise<void> {
 
 
   const tools = {
-    ...createAgentTool(executor),
+    ...createAgentTools(executor),
     ...createWebTools(tracker)
   };
 

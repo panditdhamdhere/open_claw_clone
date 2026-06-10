@@ -3,7 +3,7 @@ import { isCancel, text } from "@clack/prompts";
 import { defaultAgentConfig } from "./types";
 import { ActionTracker } from "./action-tracker";
 import { ToolExecutor } from "./tool-executor";
-import { createAgentTool } from "./agent-tools";
+import { createAgentTools } from "./agent-tools";
 import { stepCountIs, ToolLoopAgent } from "ai";
 import { getAgentModel } from "../../ai/ai.config";
 import { renderTerminalMarkdown } from "../../tui/terminal-md";
@@ -22,7 +22,7 @@ export async function runAgentMode() {
   const config = defaultAgentConfig();
   const tracker = new ActionTracker();
   const executor = new ToolExecutor(tracker, config);
-  const tools = createAgentTool(executor);
+  const tools = createAgentTools(executor);
 
   const agent = new ToolLoopAgent({
     model: getAgentModel(),
